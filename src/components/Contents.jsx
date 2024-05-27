@@ -1,5 +1,26 @@
 import React from "react";
 import styled from "styled-components";
+import Header from "./Header";
+import HomeNav from "./HomeNav";
+import Content from "./Content";
+
+const Container = styled.div`
+  width: 1728px;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+`;
+const HomeLayoutWrapper = styled.div`
+  display: flex;
+  margin: 0 auto;
+  flex-flow: row wrap;
+`;
+const HomeLayoutMainWrapper = styled.div`
+  width: 100%;
+  margin-top: 32px;
+  margin-bottom: 16px;
+`;
 
 const GridContainer = styled.div`
   display: grid;
@@ -32,14 +53,23 @@ const Contents = () => {
   }));
 
   return (
-    <GridContainer>
-      {posts.map((post) => (
-        <PostItem key={post.id}>
-          <h3>{post.title}</h3>
-          <p>{post.content}</p>
-        </PostItem>
-      ))}
-    </GridContainer>
+    <Container>
+      <HomeLayoutWrapper>
+        <Header />
+        <HomeNav />
+        <HomeLayoutMainWrapper>
+          <GridContainer>
+            <Content />
+            {posts.map((post) => (
+              <PostItem key={post.id}>
+                <h3>{post.title}</h3>
+                <p>{post.content}</p>
+              </PostItem>
+            ))}
+          </GridContainer>
+        </HomeLayoutMainWrapper>
+      </HomeLayoutWrapper>
+    </Container>
   );
 };
 
