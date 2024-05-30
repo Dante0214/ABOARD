@@ -83,7 +83,7 @@ const FooterWrapper = styled.div`
   line-height: 1.5;
   justify-content: space-between;
 `;
-const Content = () => {
+const Content = ({ post }) => {
   return (
     <ContentBox>
       <Thumbnail>
@@ -93,20 +93,14 @@ const Content = () => {
       </Thumbnail>
       <Thumbnail>
         <TextBox>
-          <TextSummary>저 개발자 취준 포기해야 할까요?</TextSummary>
+          <TextSummary>{post.title}</TextSummary>
           <div>
-            <Text>
-              안녕하세요.오늘은 얼어붙은 개발자 취업시장에서 왓에버가 자주 듣는
-              다음의 질문을 중심으로 이야기해보고자 합니다.저.. 개발자 취준
-              포기해야 할까요?지금 N개월 째 이력서를 넣고 있는데 면접은 커녕
-              서류조차 붙지 못하고 있습니다.금방 될 것 같지도 않고 지금이라도
-              빠르
-            </Text>
+            <Text>{post.content}</Text>
           </div>
           <TextSubInfo>
             <span>2일 전</span>
             <Separator>·</Separator>
-            <span>3 개의 댓글</span>
+            <span>{post.comments}</span>
           </TextSubInfo>
         </TextBox>
         <FooterWrapper></FooterWrapper>

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Header from "./Header";
-import HomeNav from "./HomeNav";
+import HomeNav from "./HomeBar";
 import Content from "./Content";
+import { supabase } from "../../supabase";
 
 const Container = styled.div`
   width: 1728px;
@@ -46,25 +47,25 @@ const PostItem = styled.div`
 `;
 
 const Contents = () => {
-  const posts = Array.from({ length: 12 }, (_, index) => ({
-    id: index,
-    title: `Post ${index + 1}`,
-    content: `This is the content of post ${index + 1}.`,
-  }));
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = async () => {
+    let { data: posts, error } = await supabase.from("posts").select("*");
+    setPosts(posts);
+  };
+  console.log(posts);
 
   return (
     <Container>
       <HomeLayoutWrapper>
-        <Header />
-        <HomeNav />
         <HomeLayoutMainWrapper>
           <GridContainer>
-            <Content />
             {posts.map((post) => (
-              <PostItem key={post.id}>
-                <h3>{post.title}</h3>
-                <p>{post.content}</p>
-              </PostItem>
+              <Content key={post.id} post={post} />
             ))}
           </GridContainer>
         </HomeLayoutMainWrapper>
